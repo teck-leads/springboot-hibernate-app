@@ -13,7 +13,7 @@ public class ReadStudent {
 
 		System.out.println(findById);
 		System.out.println("==========");
-	        List < Student > students = repository.findAll();
+	        List < Student > students = repository.findByLastName();
 	       
 	        students.forEach(System.out::println);
 	 

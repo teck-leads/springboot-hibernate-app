@@ -32,7 +32,8 @@ public class StudentRepository {
 //        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
     	try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
     		session.beginTransaction();
-             List<Student> students = session.createQuery("from student", Student.class).list();
+//             List<Student> students = session.createQuery("from student", Student.class).list();
+    		List<Student> students = session.createQuery("from student", Student.class).getResultList();
             session.getTransaction().commit();
             return students;
         }
@@ -45,6 +46,41 @@ public class StudentRepository {
     		Student student = session.get(Student.class, id);
     		session.getTransaction().commit();
     		return student;
+    	}
+    }
+    
+    
+    public List < Student > findByLastName() {
+//      try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+  	try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+  		session.beginTransaction();
+//           List<Student> students = session.createQuery("from student", Student.class).list();
+  		List<Student> students = session.createQuery("from student s where s.lastName='anupoju'", Student.class).getResultList();
+          session.getTransaction().commit();
+          return students;
+      }
+  }
+    
+    public Student updateStudentById(Integer id) {
+//    	try (Session session =HibernateUtil.getSessionFactory().openSession()){
+    	try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+    		session.beginTransaction();
+    		Student student = session.get(Student.class, id);
+    		student.setFirstName(student.getFirstName().toUpperCase());
+    		
+    		session.getTransaction().commit();
+    		return student;
+    	}
+    }
+    
+    public int updateStudentEmailIds() {
+//    	try (Session session =HibernateUtil.getSessionFactory().openSession()){
+    	try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+    		session.beginTransaction();
+    		int executeUpdate = session.createQuery("update student set email='emp@tm.com'").executeUpdate();
+    		
+    		session.getTransaction().commit();
+    		return executeUpdate;
     	}
     }
 
