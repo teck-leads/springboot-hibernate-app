@@ -9,8 +9,13 @@ public class TestApp {
 
 	public static void main(String[] args) {
 		StudentRepository studentDao = new StudentRepository();
-	        Student student = new Student(102,"dill", "anupoju", "madhav@tm.com");
-	        studentDao.saveStudent(student);
+	        Student s1 = new Student("teja", "teja", "teja@ibm.com");
+	        Student s2 = new Student("madhav", "anupoju", "madhav@tm.com");
+	        Student s3 = new Student("dill", "anupoju", "dill@us.com");
+	        studentDao.saveStudent(s1);
+	        studentDao.saveStudent(s2);
+	        studentDao.saveStudent(s3);
+	        
 
 	        List < Student > students = studentDao.getStudents();
 	       
