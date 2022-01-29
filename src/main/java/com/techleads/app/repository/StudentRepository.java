@@ -83,5 +83,15 @@ public class StudentRepository {
     		return executeUpdate;
     	}
     }
+    
+    
+    public void deleteStudentById(Integer id) {
+    	try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+    		session.beginTransaction();
+    		Student student = session.get(Student.class, id);
+    		session.delete(student);
+    		session.getTransaction().commit();
+    	}
+    }
 
 }
